@@ -11,7 +11,7 @@ public class Cart {
     @Column
     private int cartid;
 
-    @ManyToOne
+    @OneToOne(cascade = {CascadeType.ALL})
     @ElementCollection(targetClass=User.class)
     @JoinColumn
     private User user;
@@ -19,6 +19,7 @@ public class Cart {
     @OneToMany
     private Set<Item> cart;
 
+    public Cart(){}
     public Cart(User user) {
         this.user = user;
         this.cart = new HashSet<>();
@@ -54,5 +55,9 @@ public class Cart {
 
     public void popCart(Item item){
         cart.remove(item);
+    }
+
+    public void clearCart(){
+        cart.clear();
     }
 }

@@ -1,7 +1,9 @@
 package io.ooc.project.shop.controller;
 
 import com.google.gson.Gson;
+import io.ooc.project.shop.model.Cart;
 import io.ooc.project.shop.model.User;
+import io.ooc.project.shop.repository.CartRepository;
 import io.ooc.project.shop.repository.UserRepository;
 //import io.ooc.project.shop.service.UserService;
 import io.ooc.project.shop.service.UserService;
@@ -31,6 +33,9 @@ public class RegisterController {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private CartRepository cartRepository;
+
     @PostMapping(path = "/add")
     public ResponseEntity addUser(
             @RequestParam String username,
@@ -43,6 +48,9 @@ public class RegisterController {
             System.out.println(username);
             return ResponseEntity.badRequest().body("This username already exists");
         }
+        Cart cart = new Cart(user);
+
+        cartRepository.save(cart);
         userRepository.save(user);
 
         return ResponseEntity.ok(user);

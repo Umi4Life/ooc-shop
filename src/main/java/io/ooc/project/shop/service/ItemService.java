@@ -14,7 +14,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 import java.util.List;
 
-
+@Service
 public class ItemService {
 
     @Autowired
@@ -22,7 +22,9 @@ public class ItemService {
     @Autowired
     private UserRepository userRepository;
 
-
+    public Item findItemById(long id){
+        return itemRepository.findItemByItemid(id);
+    }
     public Item addItem(String name, long price, String image, String description){
         Item item = new Item();
         item.setProductNam(name);
