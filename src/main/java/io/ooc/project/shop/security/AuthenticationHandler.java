@@ -10,6 +10,8 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
+
 @Component
 public class AuthenticationHandler implements AuthenticationProvider {
 
@@ -19,10 +21,13 @@ public class AuthenticationHandler implements AuthenticationProvider {
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
         String username = authentication.getName();
+        System.out.println("AUTHENTICATION.GETNAME "+authentication.getName());
+        System.out.println("AUTHENTICATION.GETPASS "+authentication.getCredentials());
         String password = authentication.getCredentials().toString();
         User user = userService.authenticate(username,password);
         if (user!=null){
-            return new UsernamePasswordAuthenticationToken(user, null);
+            return new UsernamePasswordAuthenticationToken(user,null,
+                    new ArrayList<>());
         }
         return null;
     }

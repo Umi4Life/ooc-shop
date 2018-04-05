@@ -31,7 +31,8 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
         //to parse user infomation: http://localhost:8080/login?username=muic&password=ooc
         http
                 .authorizeRequests()
-                .antMatchers("/**").permitAll()
+                .antMatchers("/login", "/logout", "/register/add","/item/get").permitAll()
+                .antMatchers("/**").authenticated()
                 .and()
                 .formLogin().loginProcessingUrl("/login")
                 .successHandler(successAuthentication).failureHandler(failAuth)

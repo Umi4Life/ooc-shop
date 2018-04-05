@@ -5,6 +5,7 @@ import io.ooc.project.shop.model.Item;
 import io.ooc.project.shop.model.User;
 import io.ooc.project.shop.repository.ItemRepository;
 import io.ooc.project.shop.repository.UserRepository;
+import io.ooc.project.shop.service.ItemService;
 import io.ooc.project.shop.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -19,6 +20,8 @@ public class ItemController {
 
     private UserRepository userRepository;
 
+    private ItemService itemService;
+
     private UserService userService;
 
     @Autowired
@@ -26,12 +29,24 @@ public class ItemController {
         this.itemRepository = itemRepository;
     }
 
+//    @PostMapping(path = "/add")
+//    public Item add(@RequestBody String json){
+//        Gson gson = new Gson();
+//        Item item = gson.fromJson(json, Item.class);
+//        itemRepository.save(item);
+//        return item;
+//    }
+
     @PostMapping(path = "/add")
-    public Item add(@RequestBody String json){
-        Gson gson = new Gson();
-        Item item = gson.fromJson(json, Item.class);
+    public ResponseEntity addItem(
+            @RequestParam String product_name,
+            @RequestParam String image,
+            @RequestParam String description,
+            @RequestParam int price
+    ) {
+        Item item = itemService.addItem(product_name,price,image,description);
         itemRepository.save(item);
-        return item;
+        return ResponseEntity.ok(item);
     }
 
 

@@ -41,10 +41,6 @@ public class UserService {
         return user;
     }
 
-    public boolean checkExist(String username){
-        return userRepository.findByUsername(username)!=null;
-    }
-
     public User authenticate(String username, String password){
         User findUser = userRepository.findByUsername(username);
         if(findUser!=null) {
