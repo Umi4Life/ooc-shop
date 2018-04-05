@@ -41,17 +41,20 @@ public class UserService {
 
 
 
-    public boolean authenticate(String username, String password){
+    public User authenticate(String username, String password){
         User findUser = userRepository.findByUsername(username);
         if(findUser!=null) {
-            System.out.println(username);
-            System.out.println(password);
-            return BCrypt.checkpw(findUser.getPassword(), password);
+            System.out.println("FINDUSER"+findUser.getPassword());
+            System.out.println("PASSWORD"+password);
+            if(BCrypt.checkpw(findUser.getPassword(), password)){
+                return findUser;
+            }
         }
-        return false;
+        return null;
     }
 
     public void saveUser(User user) {
+
         userRepository.save(user);
     }
 

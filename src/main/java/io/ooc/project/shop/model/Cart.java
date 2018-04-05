@@ -47,7 +47,12 @@ public class Cart {
     public void addCart(Item item) {
         cart.add(item);
     }
+
     public Iterable listCart(){
         return cart;
+    }
+
+    public void popCart(Item item){
+        cart.remove(item);
     }
 }

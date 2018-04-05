@@ -10,5 +10,5 @@ import java.util.Set;
 
 @Repository("ItemRepository")
 public interface ItemRepository extends JpaRepository<Item, Long> {
-    Item findItemByItemID(long itemID);
+    Item findItemByItemid(long itemID);
 }

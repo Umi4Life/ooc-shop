@@ -10,7 +10,7 @@ public class Item {
     @Id
     @GeneratedValue
     @Column(name="itemid")
-    private Long itemID;
+    private Long itemid;
     @Column(name = "price")
     private Long price;
     @Column(name = "productName")
@@ -30,7 +30,7 @@ public class Item {
     }
 
     public Long getItemID() {
-        return itemID;
+        return itemid;
     }
 
     public Long getPrice() {
@@ -50,7 +50,7 @@ public class Item {
     }
 
     public void setItemID(Long itemID) {
-        this.itemID = itemID;
+        this.itemid = itemID;
     }
 
     public void setPrice(Long price) {
