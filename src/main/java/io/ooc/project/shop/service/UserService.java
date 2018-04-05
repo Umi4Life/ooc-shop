@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.HashSet;
 
@@ -27,7 +28,7 @@ public class UserService {
         return user;
     }
 
-    public User addUser(String username, String password, String firstName, String lastName){
+    public User addUser(String username, String password, String email){
         User user = new User();
         User duplicateCheck = userRepository.findByUsername(username);
         if(duplicateCheck!=null){
@@ -36,17 +37,18 @@ public class UserService {
         String hashpassword = BCrypt.hashpw(password,BCrypt.gensalt());
         user.setUsername(username);
         user.setPassword(hashpassword);
+        user.setEmail(email);
         return user;
     }
 
-
+    public boolean checkExist(String username){
+        return userRepository.findByUsername(username)!=null;
+    }
 
     public User authenticate(String username, String password){
         User findUser = userRepository.findByUsername(username);
         if(findUser!=null) {
-            System.out.println("FINDUSER"+findUser.getPassword());
-            System.out.println("PASSWORD"+password);
-            if(BCrypt.checkpw(findUser.getPassword(), password)){
+            if(BCrypt.checkpw(password,findUser.getPassword())){
                 return findUser;
             }
         }
@@ -54,7 +56,6 @@ public class UserService {
     }
 
     public void saveUser(User user) {
-
         userRepository.save(user);
     }
 

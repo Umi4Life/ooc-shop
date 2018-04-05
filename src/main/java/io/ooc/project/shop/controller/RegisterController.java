@@ -32,14 +32,37 @@ public class RegisterController {
     private UserService userService;
 
     @PostMapping(path = "/add")
-    public User add(@RequestBody String json){
-        Gson gson = new Gson();
-        User user = gson.fromJson(json, User.class);
-        String salt = user.getPassword();
-        user.setPassword(BCrypt.hashpw(salt,BCrypt.gensalt()));
+    public ResponseEntity addUser(
+            @RequestParam String username,
+            @RequestParam String password,
+            @RequestParam String email
+    ) {
+
+        User user = userService.addUser(username,password,email);
+        if(user == null) {
+            System.out.println(username);
+            return ResponseEntity.badRequest().body("This username already exists");
+        }
         userRepository.save(user);
-        return user;
+
+        return ResponseEntity.ok(user);
     }
+
+//    @PostMapping(path = "/add")
+//    public void addUser(@RequestBody String json){
+//        Gson gson = new Gson();
+//        System.out.println(json);
+//        User user = gson.fromJson(json, User.class);
+//        System.out.println(user.getUsername());
+//        System.out.println(user.getPassword());
+//        if(userService.checkExist(user.getUsername())){
+//            return ;
+//        }
+//        String salt = user.getPassword();
+//        user.setPassword(BCrypt.hashpw(salt,BCrypt.gensalt()));
+//        userRepository.save(user);
+//        return ;
+//    }
 
     @GetMapping(path = "/get")
     public Iterable<User> findAll(){
