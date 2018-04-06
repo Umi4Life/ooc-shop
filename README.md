@@ -18,6 +18,12 @@ http://localhost:8080/register/add?username=wit&password=1234&email=test&address
 http://localhost:8080/login?username=wit&password=1234
 ```
 
+#### GET - to view user's username:
+ 
+```
+http://localhost:8080/user/info
+```
+
 #### POST - to add item to user's cart:
  
 ```
