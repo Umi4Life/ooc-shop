@@ -16,14 +16,14 @@ public class Cart {
     @JoinColumn
     private User user;
 
-    @OneToMany
-    private Set<Item> cart;
+    @ManyToMany
+    private List<Item> items = new ArrayList<>();
 
     public Cart(){}
     public Cart(User user) {
         this.user = user;
-        this.cart = new HashSet<>();
     }
+
 
     public int getCartid() {
         return cartid;
@@ -33,8 +33,8 @@ public class Cart {
         return user;
     }
 
-    public Set<Item> getCart() {
-        return cart;
+    public List<Item> getItems() {
+        return items;
     }
 
     public void setCartid(int cartid) {
@@ -46,18 +46,18 @@ public class Cart {
     }
 
     public void addCart(Item item) {
-        cart.add(item);
+        items.add(item);
     }
 
     public Iterable listCart(){
-        return cart;
+        return items;
     }
 
     public void popCart(Item item){
-        cart.remove(item);
+        items.remove(item);
     }
 
     public void clearCart(){
-        cart.clear();
+        items.clear();
     }
 }

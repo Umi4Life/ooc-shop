@@ -40,10 +40,11 @@ public class RegisterController {
     public ResponseEntity addUser(
             @RequestParam String username,
             @RequestParam String password,
-            @RequestParam String email
+            @RequestParam String email,
+            @RequestParam String address
     ) {
 
-        User user = userService.addUser(username,password,email);
+        User user = userService.addUser(username,password,email,address, false);
         if(user == null) {
             System.out.println(username);
             return ResponseEntity.badRequest().body("This username already exists");

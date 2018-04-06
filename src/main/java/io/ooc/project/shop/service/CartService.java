@@ -8,6 +8,8 @@ import io.ooc.project.shop.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
+
 @Service
 public class CartService {
 
@@ -28,6 +30,7 @@ public class CartService {
     public void addItem(User user, Item item){
         Cart cart = cartRepository.findCartByUser(user);
         cart.addCart(item);
+        Collections.sort(cart.getItems(), (p1, p2) -> p2.getItemID().compareTo(p1.getItemID()));
         cartRepository.save(cart);
     }
 
@@ -40,7 +43,7 @@ public class CartService {
     public int getTotal(User user){
         int sum = 0;
         Cart cart = cartRepository.findCartByUser(user);
-        for (Item i: cart.getCart()){
+        for (Item i: cart.getItems()){
             sum+=i.getPrice();
         }
         return sum;
@@ -49,7 +52,7 @@ public class CartService {
     public void removeFromCart(User user, Item item){
         Cart cart = cartRepository.findCartByUser(user);
         System.out.println(item.getItemID());
-        if(cart.getCart().contains(item)){
+        if(cart.getItems().contains(item)){
             cart.popCart(item);
         }
         cartRepository.save(cart);

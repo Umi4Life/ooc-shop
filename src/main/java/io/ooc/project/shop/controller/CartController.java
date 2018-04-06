@@ -6,6 +6,7 @@ import io.ooc.project.shop.model.Item;
 import io.ooc.project.shop.model.User;
 import io.ooc.project.shop.repository.UserRepository;
 import io.ooc.project.shop.security.AuthenticationHandler;
+import io.ooc.project.shop.service.BillService;
 import io.ooc.project.shop.service.CartService;
 import io.ooc.project.shop.service.ItemService;
 import io.ooc.project.shop.service.UserService;
@@ -30,6 +31,8 @@ public class CartController {
     private ItemService itemService;
     @Autowired
     private UserService userService;
+    @Autowired
+    private BillService billService;
 
 
     @GetMapping(path = "/list")
@@ -69,11 +72,12 @@ public class CartController {
     @PostMapping(path = "/checkout")
     public String checkout(Authentication auth){
         User user = (User) auth.getPrincipal();
-
         int total = cartService.getTotal(user);
+        billService.makeBill(user);
         cartService.clearCart(user);
         return Integer.toString(total);
     }
+
 
 
 }

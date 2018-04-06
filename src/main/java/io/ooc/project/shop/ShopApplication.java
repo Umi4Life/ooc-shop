@@ -1,5 +1,9 @@
 package io.ooc.project.shop;
 
+import io.ooc.project.shop.model.User;
+import io.ooc.project.shop.repository.UserRepository;
+import io.ooc.project.shop.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
@@ -10,10 +14,14 @@ import java.beans.beancontext.BeanContext;
 
 @SpringBootApplication
 public class ShopApplication {
+    @Autowired
+    private static UserRepository userRepository;
+
+    @Autowired
+    private static UserService userService;
 
 	public static void main(String[] args) {
 		SpringApplication.run(ShopApplication.class, args);
-
 	}
 
 	@Bean

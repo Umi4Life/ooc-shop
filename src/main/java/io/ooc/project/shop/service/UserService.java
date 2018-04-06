@@ -28,7 +28,7 @@ public class UserService {
         return user;
     }
 
-    public User addUser(String username, String password, String email){
+    public User addUser(String username, String password, String email, String address, boolean isAdmin){
         User user = new User();
         User duplicateCheck = userRepository.findByUsername(username);
         if(duplicateCheck!=null){
@@ -38,6 +38,8 @@ public class UserService {
         user.setUsername(username);
         user.setPassword(hashpassword);
         user.setEmail(email);
+        user.setAddress(address);
+        user.setAdmin(isAdmin);
         return user;
     }
 

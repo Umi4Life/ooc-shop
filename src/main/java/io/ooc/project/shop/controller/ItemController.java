@@ -19,7 +19,7 @@ public class ItemController {
     private ItemRepository itemRepository;
 
     private UserRepository userRepository;
-
+    @Autowired
     private ItemService itemService;
 
     private UserService userService;

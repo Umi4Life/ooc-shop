@@ -15,10 +15,15 @@ public class User {
     private String username;
     @Column(name="password")
     private String password;
-//    @Column(name="isAdmin")
-//    private boolean isAdmin;
+
+    @Column(name="isAdmin")
+    private boolean isAdmin;
+
     @Column(name="email")
     private String email;
+
+    @Column
+    private String address;
 
     public User() {
     }
@@ -59,4 +64,19 @@ public class User {
         this.email = email;
     }
 
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public boolean isAdmin() {
+        return isAdmin;
+    }
+
+    public void setAdmin(boolean admin) {
+        isAdmin = admin;
+    }
 }
