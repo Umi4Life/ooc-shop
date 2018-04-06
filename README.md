@@ -30,7 +30,7 @@ http://localhost:8080/cart/add?itemid=1
 http://localhost:8080/cart/list
 ```
 
-#### POST - to remove an item from user's cart:
+#### POST - to remove an item from user's cart by item id:
  
 ```
 http://localhost:8080/cart/remove?itemid=1
@@ -44,6 +44,7 @@ http://localhost:8080/cart/checkout
 
 #### POST - to remove an item from user's cart:
  
+```
 http://localhost:8080/cart/clear
 ```
 
@@ -51,4 +52,10 @@ http://localhost:8080/cart/clear
  
 ```
 http://localhost:8080/cart/checkout
+```
+
+#### POST - to add an item to database:
+ 
+```
+http://localhost:8080/item/add?product_name=test&image=/&description=test&price=10
 ```
