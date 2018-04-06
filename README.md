@@ -1,5 +1,9 @@
 # ooc-shop
 
+![alt text](/UML.jpeg)
+
+![alt text](/flowchart.jpg)
+
 #### GET - to view all items stored in database (you do not need to be logged in):
  
 ```
