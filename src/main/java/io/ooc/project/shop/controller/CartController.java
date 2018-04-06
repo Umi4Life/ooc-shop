@@ -34,7 +34,6 @@ public class CartController {
     @Autowired
     private BillService billService;
 
-
     @GetMapping(path = "/list")
     public Iterable<Item> getCart(Authentication auth
     ) {
